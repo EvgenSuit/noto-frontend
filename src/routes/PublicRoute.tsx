@@ -10,6 +10,6 @@ export const PublicRoute = ({children}: PropsWithChildren) => {
         if (accessToken) {
             navigate('/dashboard', { replace: true })
         }
-    }, [accessToken])
+    }, [accessToken, navigate])
     return <>{children}</>
 }

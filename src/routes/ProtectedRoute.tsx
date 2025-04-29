@@ -8,8 +8,8 @@ export const ProtectedRoute = () => {
 
     useEffect(() => {
         if (!accessToken) {
-            navigate('auth', { replace: true })
+            navigate('/auth', { replace: true })
         }
-    }, [accessToken])
+    }, [accessToken, navigate])
     return <Outlet />
 }

@@ -1,6 +1,6 @@
 import { createBrowserRouter, RouterProvider, useNavigate } from "react-router-dom"
 import { useAuth } from "../auth/api/auth_context"
-import { Dashboard } from "../dashboard/components/dashboard"
+import { Dashboard } from "../dashboard/components/Dashboard"
 import { ProtectedRoute } from "./ProtectedRoute"
 import { Home } from "../home/components/Home"
 import { Auth } from "../auth/components/Auth"
@@ -15,9 +15,9 @@ export const Routes = () => {
         {
             path: 'auth',
             element: (
-            <PublicRoute>
-                <Auth />
-            </PublicRoute>)
+                <PublicRoute>
+                    <Auth />
+                </PublicRoute>)
         }
     ]
     const privateRoutes = [

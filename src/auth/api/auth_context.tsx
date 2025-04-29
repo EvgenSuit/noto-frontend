@@ -8,7 +8,7 @@ interface Tokens {
     refreshToken: string | null
 }
 
-interface AuthContextType {
+export interface AuthContextType {
     tokens: Tokens,
     setTokens: Dispatch<SetStateAction<Tokens>>
   }
@@ -21,7 +21,6 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType>(defaultValue);
 
 const AuthProvider = ({ children }: PropsWithChildren) => {
-    
     const [tokens, setTokens] = useState<Tokens>({
         accessToken: localStorage.getItem('accessToken'),
         refreshToken: localStorage.getItem('refreshToken')

@@ -9,7 +9,7 @@ export type Credentials = {
     password: string
 }
 
-type AuthenticationResponse = {
+export type AuthenticationResponse = {
     accessToken: string,
     refreshToken: string
 }
