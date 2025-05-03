@@ -98,9 +98,37 @@ const formatDate = (dateString: string): string => {
 export const postTodo = async (title: string) => {
     await api.post('/',
         {
-            title: title,
+            title: title.trim(),
             status: 'NONE'
         },
+        {
+            headers: {
+                'Authorization': `Bearer ${getAuth().tokens.accessToken}`,
+                'Content-Type': 'application/json'
+            }
+        }
+    )
+    return await getTodos()
+}
+
+export const putTodo = async (id: number, title: string, status: string) => {
+    await api.put('/' + id,
+        {
+            title: title.trim(),
+            status: status
+        },
+        {
+            headers: {
+                'Authorization': `Bearer ${getAuth().tokens.accessToken}`,
+                'Content-Type': 'application/json'
+            }
+        }
+    )
+    return await getTodos()
+}
+
+export const deleteTodo = async (id: number) => {
+    await api.delete('/' + id,
         {
             headers: {
                 'Authorization': `Bearer ${getAuth().tokens.accessToken}`,

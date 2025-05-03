@@ -2,8 +2,8 @@
 .dashboard-container {
     font-family: 'Arial', sans-serif;
     padding: 20px;
-    max-width: 600px;
-    margin: 0 auto;
+    
+    
     background-color: #f4f7fc;
     border-radius: 8px;
     box-shadow: 0 12px 15px rgba(0, 0, 0, 0.1);
@@ -23,6 +23,7 @@
 }
 
 .todo-item {
+    width: 100%;
     display: flex;
     flex-direction: column;
     padding: 12px;
@@ -33,9 +34,40 @@
     transition: background-color 0.2s ease;
 }
 
+.todo-item-container {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    min-width: 0;
+    gap: 10px;
+}
+
+.todo-item-container:hover .delete-item {
+    color: red;
+    background-color: transparent;
+}
+
+.delete-item-button {
+    color: transparent;
+    background-color: transparent;
+    border-style: none;
+    
+}
+
+.delete-item {
+    height: 24px;
+    width: 24px;
+    min-width: 24px;
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+    justify-content: center;
+    color: transparent;
+}
+
 .todo-item-header {
     display: flex;
-    justify-content: space-between;
+    gap: 15px;
     align-items: center;
 }
 
@@ -49,8 +81,24 @@
     background-color: #f0f0f5;
 }
 
+.todo-title-container {
+    flex: 1;
+    display: flex;
+}
+
 .todo-title {
+    word-break: break-word;
+    display: block;
+    text-overflow: ellipsis;
     font-size: 18px;
+    color: #555;
+}
+
+.todo-title-edit {
+    resize: vertical;
+    flex: 1;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    background-color: #ffffff;
     color: #555;
 }
 
@@ -58,6 +106,9 @@
     font-size: 14px;
     font-weight: bold;
     text-transform: capitalize;
+    padding: 10px 10px;
+    border-radius: 15px;
+    background-color: #f4f7fc;
 }
 
 .todo-status.none {
