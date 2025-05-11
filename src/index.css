@@ -23,14 +23,14 @@ a:hover {
 
 body {
   margin: 0;
+  height: 100vh;
   display: flex;
-  place-items: center;
+  flex-direction: column;
   justify-content: center;
-  
-  min-width: 320px;
-  min-height: 100vh;
+
   background: linear-gradient(#535bf2, #747bff);
   background-attachment: fixed;
+  text-align: center;
 }
 
 

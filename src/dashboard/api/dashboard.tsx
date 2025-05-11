@@ -16,6 +16,7 @@ export type Todo = {
 const api = axios.create({
     baseURL: DASHBOARD_URL,
         headers: {
+            'Accept-Language': navigator.language || navigator.languages[0],
             'Content-Type': 'application/json'
         }
 })

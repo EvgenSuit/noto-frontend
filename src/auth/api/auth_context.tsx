@@ -25,7 +25,7 @@ const AuthProvider = ({ children }: PropsWithChildren) => {
         accessToken: localStorage.getItem('accessToken'),
         refreshToken: localStorage.getItem('refreshToken')
     })
-
+    
     useEffect(() => {
         if (tokens.accessToken) {
             axios.defaults.headers.common['Authorization'] = 'Bearer ' + tokens.accessToken

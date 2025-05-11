@@ -3,6 +3,7 @@ import { postTodo, getTodos, setAuth, setAuthGetter, Todo, putTodo, deleteTodo }
 import { useAuth } from "../../auth/api/auth_context"
 import DeleteIcon from '@mui/icons-material/Delete'
 import './Dashboard.css'
+import { toast, ToastContainer } from "react-toastify"
 
 
 export const Dashboard = () => {
@@ -12,22 +13,43 @@ export const Dashboard = () => {
 
     useEffect(() => {
         setAuthGetter(() => auth);
-        (async () => {
-            const todos = await getTodos()
-            setTodos(todos)
-           
-        })()
+        if (auth.tokens.accessToken && auth.tokens.refreshToken) {
+            (async () => {
+                try {
+                    const todos = await getTodos()
+                    setTodos(todos)
+                } catch(e) {
+                    toast.error('Unable to fetch todos')
+                    console.log(e)
+                }
+            })()
+        }
     }, [auth])
 
     async function addTodo(title: string) {
-        const newTodos = await postTodo(title)
-        setTodos(newTodos)
+        try {
+            const newTodos = await postTodo(title)
+            setTodos(newTodos)
+        } catch(e) {
+            toast.error('Unable to add todo')
+            console.log(e)
+        }
     }
     async function modifyTodo(id: number, title: string, status: string) {
-        setTodos(await putTodo(id, title, status))
+        try {
+            setTodos(await putTodo(id, title, status))
+        } catch (e) {
+            toast.error('Unable to modify todo')
+            console.log(e)
+        }
     }
     async function removeTodo(id: number) {
-        setTodos(await deleteTodo(id))
+        try {
+            setTodos(await deleteTodo(id))
+        } catch (e) {
+            toast.error('Unable to delete todo')
+            console.log(e)
+        }
     }
 
     return (
@@ -55,6 +77,8 @@ export const Dashboard = () => {
                 </div>
             ))}
         </ul>
+        <ToastContainer position='bottom-center' autoClose={3300} hideProgressBar={true}
+        pauseOnHover={false}/>
     </div>
  )
 }
