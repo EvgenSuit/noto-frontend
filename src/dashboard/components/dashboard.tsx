@@ -4,6 +4,8 @@ import { useAuth } from "../../auth/api/auth_context"
 import DeleteIcon from '@mui/icons-material/Delete'
 import './Dashboard.css'
 import { toast, ToastContainer } from "react-toastify"
+import { AppBar, Button, Toolbar } from "@mui/material"
+import { CommonAppBar } from "../../components/CommonAppBar"
 
 
 export const Dashboard = () => {
@@ -51,9 +53,16 @@ export const Dashboard = () => {
             console.log(e)
         }
     }
+    function logOut() {
+        auth.setTokens({accessToken: null, refreshToken: null})
+    }
 
     return (
-    <div className="dashboard-container">
+    <div>
+        <CommonAppBar
+            buttonText="Log Out"
+            onButtonClick={logOut} />
+        <div className="dashboard-container">
         <h1 className="dashboard-title">Dashboard</h1>
         <NewTodo
             onNewTodoSubmit={(title: string) => {
@@ -79,6 +88,7 @@ export const Dashboard = () => {
         </ul>
         <ToastContainer position='bottom-center' autoClose={3300} hideProgressBar={true}
         pauseOnHover={false}/>
+    </div>
     </div>
  )
 }
