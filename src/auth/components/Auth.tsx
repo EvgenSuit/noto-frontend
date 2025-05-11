@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../api/auth_context'
 import { toast, ToastContainer } from 'react-toastify'
 import { Visibility, VisibilityOff } from '@mui/icons-material'
+import { CommonAppBar } from '../../components/CommonAppBar'
 
 export const Auth = () => {
     const navigate = useNavigate()
@@ -102,69 +103,72 @@ export const Auth = () => {
     }
 
   return (
-    <div className='container'>
-        <div className="header">
-            <div className="text">{action}</div>
-            <div className="underline"></div>
-        </div>
-        <div className="inputs">
-            {action === 'Sign Up' && 
+    <div>
+        <CommonAppBar />
+        <div className='container'>
+            <div className="header">
+                <div className="text">{action}</div>
+                <div className="underline"></div>
+            </div>
+            <div className="inputs">
+                {action === 'Sign Up' && 
+                    <Input
+                        src={userIcon}
+                        type="text"
+                        inputError={inputError.name}
+                        placeholder="Name"
+                        name="name"
+                        value={credentials.name}
+                        onChange={onCredentialsChange}/> 
+                    }
                 <Input
-                    src={userIcon}
-                    type="text"
-                    inputError={inputError.name}
-                    placeholder="Name"
-                    name="name"
-                    value={credentials.name}
-                    onChange={onCredentialsChange}/> 
-                }
-            <Input
-                src={emailIcon}
-                type="email"
-                inputError={inputError.email}
-                placeholder="Email"
-                name="email"
-                value={credentials.email}
-                onChange={onCredentialsChange}
-            />
-            <Input
-                src={passwordIcon}
-                type="password"
-                inputError={inputError.password}
-                placeholder="Password"
-                name="password"
-                value={credentials.password}
-                onChange={onCredentialsChange}
-            />
+                    src={emailIcon}
+                    type="email"
+                    inputError={inputError.email}
+                    placeholder="Email"
+                    name="email"
+                    value={credentials.email}
+                    onChange={onCredentialsChange}
+                />
+                <Input
+                    src={passwordIcon}
+                    type="password"
+                    inputError={inputError.password}
+                    placeholder="Password"
+                    name="password"
+                    value={credentials.password}
+                    onChange={onCredentialsChange}
+                />
+            </div>
+            <div className="submit-container"
+            >
+                {
+                action === 'Sign In' ? 
+                    (<div className={`submit submit${!isFormValid ? '-disabled' : ''}`}
+                    onClick={() => isFormValid ? handleSignIn() : {}}>Sign In</div>) : 
+                    (<div className={`submit submit${!isFormValid ? '-disabled' : ''}`}
+                    onClick={() => isFormValid ? handleSignUp() : {}}>Sign Up</div>)    
+            }
+            </div>
+            <div className='go-to-prompt'
+            onClick={() => {
+                setCredentials({
+                    name: '',
+                    email: '',
+                    password: ''
+                })
+                setInputError({
+                    name: '',
+                    email: '',
+                    password: ''
+                })
+                setAction(prev => prev === 'Sign In' ? 'Sign Up' : 'Sign In')
+            }}>
+                Go to {action === 'Sign In' ? 'Sign Up' : 'Sign In'}
+            </div>
+            <ToastContainer position='bottom-center' autoClose={3300} hideProgressBar={true}
+            pauseOnHover={false} />
         </div>
-        <div className="submit-container"
-        >
-            {
-            action === 'Sign In' ? 
-                (<div className={`submit submit${!isFormValid ? '-disabled' : ''}`}
-                onClick={() => isFormValid ? handleSignIn() : {}}>Sign In</div>) : 
-                (<div className={`submit submit${!isFormValid ? '-disabled' : ''}`}
-                onClick={() => isFormValid ? handleSignUp() : {}}>Sign Up</div>)    
-        }
-        </div>
-        <div className='go-to-prompt'
-        onClick={() => {
-            setCredentials({
-                name: '',
-                email: '',
-                password: ''
-            })
-            setInputError({
-                name: '',
-                email: '',
-                password: ''
-            })
-            setAction(prev => prev === 'Sign In' ? 'Sign Up' : 'Sign In')
-        }}>
-            Go to {action === 'Sign In' ? 'Sign Up' : 'Sign In'}
-        </div>
-        <ToastContainer position='bottom-center' autoClose={3300} hideProgressBar={true}
-        pauseOnHover={false} />
     </div>
   )
 }

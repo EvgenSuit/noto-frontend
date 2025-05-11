@@ -1,25 +1,17 @@
 import { useNavigate } from "react-router-dom"
 import { useAuth } from "../../auth/api/auth_context"
+import { CommonAppBar } from "../../components/CommonAppBar"
 
 export const Home = () => {
     const navigate = useNavigate()
-    const { tokens } = useAuth()
+    const { tokens: {accessToken} } = useAuth()
+    const text = !accessToken ? "Log In" : "Dashboard"
+    const onClick = !accessToken ? () => navigate('/auth') : () => navigate('/dashboard')
     return (
         <div>
-            {!tokens.accessToken ? (
-                <button
-                    onClick={() => navigate('/auth')}
-                >Log In</button>
-            ) : (
-                <button
-                    onClick={() => navigate('/dashboard')}
-                >
-                    Dashboard
-                </button>
-            )}
-            <header>
-                <h1>Noto</h1>
-            </header>
+            <CommonAppBar
+                buttonText={text}
+                onButtonClick={onClick} />
             <main>
                 <p>Noto - track your progress</p>
             </main>
